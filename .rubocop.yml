@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - log/**/*
+    - public/**/*
+    - storage/**/*
+    - tmp/**/*
+    - Gemfile
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 120
