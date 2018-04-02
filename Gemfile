@@ -3,17 +3,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.0'
 
+# Server / Database
 gem 'rails', '~> 5.2.0.rc2'
 gem 'puma', '~> 3.11'
 gem 'pg', '< 2.0'
 gem 'bootsnap', require: false
 gem 'mini_racer', platforms: :ruby
 
+# Assets / Templating
 gem 'slim-rails'
 gem 'jbuilder'
 gem 'sass-rails'
 gem 'uglifier'
 
+# Utilities
+gem 'mail'
 # gem 'mini_magick'
 
 group :development, :test do

@@ -196,6 +196,7 @@ DEPENDENCIES
   factory_bot
   jbuilder
   listen (< 3.2)
+  mail
   mini_racer
   pg (< 2.0)
   puma (~> 3.11)
