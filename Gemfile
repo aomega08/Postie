@@ -29,4 +29,9 @@ group :development do
   gem 'spring-watcher-listen'
 end
 
+group :test do
+  gem 'shoulda-matchers'
+  gem 'factory_bot'
+end
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
