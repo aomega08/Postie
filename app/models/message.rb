@@ -23,7 +23,7 @@ class Message < ApplicationRecord
     if from_name.present?
       "#{from_name} <#{from}>"
     else
-      "<#{from}>"
+      from
     end
   end
 

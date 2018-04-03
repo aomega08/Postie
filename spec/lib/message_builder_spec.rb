@@ -16,6 +16,12 @@ RSpec.describe MessageBuilder do
       expect(mail.header['From'].to_s).to match(/^"?[a-z\.' ]+"? <[^>]+@[^>]+>$/i)
     end
 
+    it 'correctly sets the From header when sender name is missing' do
+      message.from_name = ''
+      mail = subject.build
+      expect(mail.header['From'].to_s).to match(/^.+@.+$/i)
+    end
+
     it 'sets the To header' do
       mail = subject.build
       expect(mail.header['To'].to_s).to match(/^"?[a-z\.' ]+"? <[^>]+@[^>]+>$/i)
