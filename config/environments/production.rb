@@ -58,8 +58,11 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 
-  # Enable lograge
+  # Enable lograge and report the correlation_id
   config.lograge.enabled = true
+  config.lograge.custom_options = lambda do |_event|
+    { correlation_id: RequestStore[:correlation_id] }
+  end
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
