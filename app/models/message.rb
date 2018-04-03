@@ -30,4 +30,8 @@ class Message < ApplicationRecord
   def cc_header
     message_recipients.cc.map(&:to_header).join(', ')
   end
+
+  def recipient_emails
+    recipients.map(&:email).uniq
+  end
 end

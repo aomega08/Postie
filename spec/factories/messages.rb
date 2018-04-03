@@ -12,5 +12,13 @@ FactoryBot.define do
     after(:build) do |message|
       message.message_recipients << build(:to_recipient, message: message)
     end
+
+    factory :message_with_multiple_recipients do
+      after(:build) do |message|
+        2.times { message.message_recipients << build(:to_recipient, message: message) }
+        3.times { message.message_recipients << build(:cc_recipient, message: message) }
+        message.message_recipients << build(:bcc_recipient, message: message)
+      end
+    end
   end
 end
