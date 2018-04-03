@@ -14,4 +14,20 @@ class Message < ApplicationRecord
   def deliver
     MessageDeliverer.new(self).deliver
   end
+
+  def from_header
+    if from_name.present?
+      "#{from_name} <#{from}>"
+    else
+      "<#{from}>"
+    end
+  end
+
+  def to_header
+    message_recipients.to.map(&:to_header).join(', ')
+  end
+
+  def cc_header
+    message_recipients.cc.map(&:to_header).join(', ')
+  end
 end

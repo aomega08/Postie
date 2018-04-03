@@ -7,4 +7,13 @@ class MessageRecipient < ApplicationRecord
   belongs_to :recipient
 
   enum recipient_type: %i[to cc bcc]
+
+  def to_header
+    header_name = name || recipient.name
+    if header_name
+      "#{header_name} <#{recipient.email}>"
+    else
+      "<#{recipient.email}>"
+    end
+  end
 end
