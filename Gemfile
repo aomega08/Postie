@@ -17,6 +17,7 @@ gem 'sass-rails'
 gem 'uglifier'
 
 # Utilities
+gem 'lograge'
 gem 'mail'
 # gem 'mini_magick'
 
