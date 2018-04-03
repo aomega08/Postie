@@ -37,6 +37,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'simplecov', require: false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
