@@ -1,0 +1,107 @@
+openapi: 3.0.0
+
+servers:
+  - url: 'http://localhost:3000/v1'
+
+info:
+  title: Postie
+  description: >-
+    Postie is a Transactional Email microservice that you can run alongside
+    other services in your platform. Find out more about Postie at
+    [https://github.com/aomega08/Postie](https://github.com/aomega08/Postie).
+  version: 1.0.0
+  termsOfService: 'https://github.com/aomega08/Postie/blob/master/LICENSE'
+  contact:
+    email: fra.boffa@gmail.com
+  license:
+    name: LGPL 3.0
+    url: 'https://opensource.org/licenses/lgpl-3.0.html'
+
+tags:
+  - name: Messages
+    description: Operations on email messages
+
+paths:
+  /messages:
+    post:
+      tags:
+        - Messages
+      summary: Send an email message
+      description: Send an email message to one or more recipients connecting to their SMTP servers.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageData'
+        description: Details about the email to send.
+        required: true
+      responses:
+        '201':
+          description: The email has been sent.
+        '400':
+          description: Request data is missing or invalid.
+
+components:
+  schemas:
+    MessageData:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - from
+            - recipients
+          properties:
+            from:
+              type: string
+              description: Email sender address.
+              example: alice@example.com
+            from_name:
+              type: string
+              description: Email sender name.
+              example: Alice Liddel
+            recipients:
+              type: array
+              items:
+                $ref: '#/components/schemas/Recipient'
+            subject:
+              type: string
+              description: Subject of the email.
+              example: Hello World!
+            content:
+              type: string
+              description: Plaintext version of the email content.
+              example: "Hi Bob, here's a special salute for you..."
+            html_content:
+              type: string
+              description: HTML version of the email content.
+              example: "Hi Bob,\n\nhere's a special salute for you..."
+            headers:
+              type: object
+              description: >-
+                Additional email headers to send. Some headers may not be
+                allowed.
+
+    Recipient:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: Email address of the recipient.
+          example: bob@example.com
+        name:
+          type: string
+          description: Name of the recipient.
+          example: Bob Doe
+        type:
+          type: string
+          description: 'Type of recipient (To, Cc, Bcc)'
+          default: to
+          enum:
+            - to
+            - cc
+            - bcc
