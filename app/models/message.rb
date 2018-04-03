@@ -11,6 +11,19 @@ class Message < ApplicationRecord
 
   validates :from, presence: true
 
+  def build_recipients(data)
+    data.each do |item|
+      # Find a known recipient given the email. Create it with the name if missing.
+      recipient = Recipient.create_with(name: item[:name]).find_or_create_by(email: item[:email])
+
+      # Set the name on an existing record missing it.
+      recipient.update(name: item[:name]) if recipient.name.blank?
+
+      # Build the MessageRecipient object.
+      message_recipients.build(recipient: recipient, name: item[:name], recipient_type: item[:type].presence || :to)
+    end
+  end
+
   def deliver
     MessageDeliverer.new(self).deliver
   end

@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   scope path: '/meta', controller: :meta do
     get :ping
   end
+
+  namespace :v1, defaults: { format: :json } do
+    resources :messages, only: :create
+  end
 end
