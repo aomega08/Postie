@@ -42,7 +42,7 @@ class MessageBuilder
     return if message.content.blank?
 
     mail.text_part = Mail::Part.new(
-      body: message.content
+      body: message.content, content_type: 'text/html; charset=UTF-8'
     )
   end
 
