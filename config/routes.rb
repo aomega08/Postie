@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   end
 
   namespace :v1, defaults: { format: :json } do
-    resources :messages, only: :create
+    resources :messages, only: %i[index create show] do
+      get :content, on: :member
+    end
   end
 end

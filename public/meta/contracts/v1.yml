@@ -41,6 +41,53 @@ paths:
         '400':
           description: Request data is missing or invalid.
 
+    get:
+      tags:
+        - Messages
+      summary: List or search sent email messages
+      description: List sent email messages ordered by descending creation time. Some parameters can be used to filter and search in time.
+      responses:
+        '200':
+          description: Success
+
+  '/messages/{id}':
+    get:
+      tags:
+        - Messages
+      summary: Get informations about an email message
+      description: Get informations like sender, recipients, subject and tags for a specific email. Does not report email content.
+      parameters:
+        - name: id
+          in: path
+          description: Message ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The message was found and its details are in the response body.
+        '404':
+          description: The provided Message ID is invalid or does not exist.
+
+  '/messages/{id}/content':
+    get:
+      tags:
+        - Messages
+      summary: Get content details of an email message
+      description: Get textual and html content of an email, as well as eventual attachments.
+      parameters:
+        - name: id
+          in: path
+          description: Message ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The message was found and its details are in the response body.
+
 components:
   schemas:
     MessageData:

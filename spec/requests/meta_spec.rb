@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Meta API', type: :request do
-  describe '/meta/ping' do
-    it 'is successful' do
+  describe 'GET /meta/ping' do
+    it 'responds with OK (200)' do
       get '/meta/ping'
       expect(response.code.to_i).to eq 200
     end
