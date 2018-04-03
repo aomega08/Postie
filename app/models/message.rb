@@ -15,6 +15,10 @@ class Message < ApplicationRecord
     MessageDeliverer.new(self).deliver
   end
 
+  def headers
+    JSON.parse(self[:headers])
+  end
+
   def from_header
     if from_name.present?
       "#{from_name} <#{from}>"

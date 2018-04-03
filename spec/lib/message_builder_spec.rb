@@ -44,6 +44,13 @@ RSpec.describe MessageBuilder do
       expect(mail.header['Subject'].to_s).to eq ''
     end
 
+    it 'sets custom headers' do
+      message.headers = { 'X-Test-ID': 123 }.to_json
+
+      mail = subject.build
+      expect(mail.header['X-Test-ID'].to_s).to eq '123'
+    end
+
     it 'sets the textual content' do
       mail = subject.build
       expect(mail.text_part.to_s).to_not be_nil

@@ -28,7 +28,7 @@ class MessageBuilder
   attr_reader :message
 
   def add_headers(mail)
-    message.headers do |k, v|
+    message.headers.each do |k, v|
       mail.header[k] = v
     end
   end
