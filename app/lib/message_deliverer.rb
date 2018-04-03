@@ -46,8 +46,10 @@ class MessageDeliverer
   end
 
   def deliver_to(mx, rcpt_to)
+    client = smtp_client(mx)
+
     if Rails.env.production?
-      smtp_client.start do |smtp|
+      client.start do |smtp|
         smtp.send_message(@builder.body, message.from, rcpt_to)
       end
     else

@@ -13,7 +13,7 @@ class MessageRecipient < ApplicationRecord
     if header_name
       "#{header_name} <#{recipient.email}>"
     else
-      "<#{recipient.email}>"
+      recipient.email
     end
   end
 end

@@ -27,6 +27,13 @@ RSpec.describe MessageBuilder do
       expect(mail.header['To'].to_s).to match(/^"?[a-z\.' ]+"? <[^>]+@[^>]+>$/i)
     end
 
+    it 'correctly sets the To header when recipient name is missing' do
+      message.recipients.first.update(name: nil)
+      message.message_recipients.first.update(name: nil)
+      mail = subject.build
+      expect(mail.header['To'].to_s).to match(/^.+@.+$/i)
+    end
+
     it 'sets the To header correctly for multiple recipients' do
       message.message_recipients << FactoryBot.build(:to_recipient, message: message)
       mail = subject.build
